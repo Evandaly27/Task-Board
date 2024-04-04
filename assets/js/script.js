@@ -54,10 +54,12 @@ function handleAddTask(event) {
         description,
         dueDate,
         status: 'to-do'
-    };
 
+    };
+    
+    console.log(newTask);
     taskList.push(newTask);
-    window.localStorage.setItem("tasks", JSON.stringify(taskList));
+    window.localStorage.getItem("tasks", JSON.stringify(taskList));
 
     renderTaskList();
     $('#formModal').modal('hide');
