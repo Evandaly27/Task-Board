@@ -15,12 +15,30 @@ return nextId;
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-
+    return `
+    <div class="card mb-2 task-card" data-task-id="${task.id}"
+    <div class="card-body">
+    <h5 class="card-title">${task.title}</h5>
+    <p class="card-text">${task.description}</p>
+    <p class="text-muted">Due: ${task.dueDate}</p>
+    <button class=btn btn-danger delete-task-btn">Delete</button>
+    </div>
+    </div>
+    `;
 }
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
+    if (!taskList) {
+        taskList = [];
+    }
 
+    ['to-do', 'in-progress', 'done'].forEach(status => {
+        $(`#${status}-cards`).empty();
+        taskList.filter(task => task.status === status).forEach(task => {
+            $(`#${status}-cards`).append(createTaskCard(task));
+        });
+    });
 }
 
 // Todo: create a function to handle adding a new task
